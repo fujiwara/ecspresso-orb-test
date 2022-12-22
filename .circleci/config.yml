@@ -9,17 +9,17 @@ jobs:
       - image: cimg/base:2022.12
     steps:
       - checkout
-      - ecspresso2.0.3/install:
+      - ecspresso/install:
           version: latest
       - run:
           command: |
             ecspresso version | fgrep v2.
-      - ecspresso2.0.3/install:
+      - ecspresso/install:
           version: v1.7.15
       - run:
           command: |
             ecspresso version | fgrep v1.7.15
-      - ecspresso2.0.3/install:
+      - ecspresso/install:
           version-file: .ecspresso-version
       - run:
           command: |
