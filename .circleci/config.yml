@@ -21,7 +21,7 @@ jobs:
           command: |
             ecspresso version | fgrep v1.7.15
       - ecspresso2.0.2/install:
-          version-file: tests/.ecspresso-version
+          version-file: .ecspresso-version
       - run:
           command: |
             ecspresso version | fgrep v2.0.0
