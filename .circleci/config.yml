@@ -1,7 +1,8 @@
 version: 2.1
 
 orbs:
-  ecspresso: fujiwara/ecspresso@2.0.3
+  #ecspresso: fujiwara/ecspresso@2.0.3
+  ecspresso: fujiwara/ecspresso@dev:latest
 
 jobs:
   install:
@@ -24,12 +25,44 @@ jobs:
       - run:
           command: |
             ecspresso version | fgrep v2.0.0
+  install-arm:
+    machine:
+      image: ubuntu-2004:202201-01
+    resource_class: arm.medium
+    steps:
+      - checkout
+      - ecspresso/install:
+          version: latest
+          os: linux
+          arch: arm64
+      - run:
+          command: |
+            ecspresso version | fgrep v2.
+      - ecspresso/install:
+          version: v1.7.15
+          os: linux
+          arch: arm64
+      - run:
+          command: |
+            ecspresso version | fgrep v1.7.15
+      - ecspresso/install:
+          version-file: .ecspresso-version
+          os: linux
+          arch: arm64
+      - run:
+          command: |
+            ecspresso version | fgrep v2.0.0
 
 workflows:
   version: 2
   deploy:
     jobs:
       - install:
+          filters:
+            branches:
+              only:
+                - main
+      - install-arm:
           filters:
             branches:
               only:
