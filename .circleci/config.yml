@@ -10,6 +10,9 @@ jobs:
       - image: cimg/base:2022.12
     steps:
       - checkout
+      - run:
+          command: |
+            uname -a
       - ecspresso/install:
           version: latest
       - run:
@@ -31,6 +34,9 @@ jobs:
     resource_class: arm.medium
     steps:
       - checkout
+      - run:
+          command: |
+            uname -a
       - ecspresso/install:
           version: latest
           os: linux
